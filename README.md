@@ -1,5 +1,5 @@
 # DRS-cli
-Bravado-based client for Data Repository Service (DRS) API services
+Bravado-based client for GA4GH Data Repository Service (DRS) API services
 
 # Installation
 
