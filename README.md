@@ -27,3 +27,7 @@ Install required packages
 ```bash
 pip install -r requirements.txt
 ```
+
+# Usage
+
+Import the Client class and instantiate an object with the url for the mock-service. Then use the class functions to send requests.
