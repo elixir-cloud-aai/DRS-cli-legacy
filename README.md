@@ -32,7 +32,7 @@ returns a response from one of the live mock services.
 
 # Usage
 
-The client implemented in this module are solely to support the functioning of the [TESTribute] repository and are 
+The client implemented in this module are solely to support the functioning of the [TEStribute] repository and are 
 tested to work for the [mock-DRS] server.
 
 [TESTribute]:https://github.com/elixir-europe/TEStribute 
