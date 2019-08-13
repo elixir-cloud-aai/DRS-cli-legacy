@@ -44,7 +44,7 @@ if __name__ == "__main__":
     # An example of how to create & use the client
 
     # create an object using the Client class
-    client = Client(url="http://0.0.0.0:9101/ga4gh/drs/v1")
+    client = Client(url="http://193.166.24.114/ga4gh/drs/v1")
     c = client.client
-    response = client.GetObject("a004")
+    response = client.GetObject("a001")
     print(response)
