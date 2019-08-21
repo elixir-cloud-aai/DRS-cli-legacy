@@ -1,6 +1,7 @@
 """
 Client script for the GA4GH data repository schema
 """
+
 from typing import List
 
 from bravado.client import SwaggerClient, CallableOperation
@@ -20,10 +21,7 @@ class Client:
     def __init__(self, url, config=DEFAULT_CONFIG):
 
         swagger_path = "{url}/swagger.json".format(url=url.rstrip("/"))
-        self.models = SwaggerClient.from_url(
-            swagger_path,
-            config=config
-        )
+        self.models = SwaggerClient.from_url(swagger_path, config=config)
         self.client = self.models.DataRepositoryService
 
     def GetAccessURL(self, object_id, access_id):
@@ -41,7 +39,26 @@ class Client:
         return self.client.GetServiceInfo().result()
 
     def updateDatabaseObjects(self, clear: bool, objects: List):
-        objects = [str(x) for x in objects]
+        """
+        :param clear: if the database should be cleared or not
+        :param objects: a list of dicts( which should be the drs objects)
+        :return: a list of available object_id's on the drs_db
+        """
+
         UpdateObjects = self.models.get_model("UpdateObjects")
-        request = UpdateObjects(clear=clear, objects=objects)
-        return self.client.updateDatabaseObjects(body=request).result()
+
+        db_objects = []
+        for obj in objects:
+            if not {"id", "size", "created", "access_methods"}.issubset(obj):
+                print("provide " + str({"id", "size", "created", "access methods"} - set(obj.keys()))+ " for object")
+            else:
+                db_object = self.models.get_model("Object")
+                db_objects.extend([db_object._from_dict(obj)])
+
+        if db_objects == []:
+            print("No valid objects found in request")
+            return None
+
+        request = UpdateObjects(clear_db=clear, data_objects=db_objects)
+        response = self.client.updateDatabaseObjects(body=request).result()
+        return response.objects
