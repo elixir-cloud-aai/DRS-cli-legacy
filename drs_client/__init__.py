@@ -26,16 +26,16 @@ class Client:
         )
         self.client = self.models.DataRepositoryService
 
-    def getAccessURL(
+
+    def getObject(
         self,
-        object_id: str,
-        access_id: str,
+        object_id,
         timeout: float = 3,
     ):
-        return self.client.GetAccessURL(
+        return self.client.GetObject(
             object_id=object_id,
-            access_id=access_id,
         ).result(timeout=timeout)
+
 
     def updateDatabaseObjects(
         self,
@@ -62,7 +62,7 @@ class Client:
             clear_db=clear_db,
             data_objects=db_objects
         )
-        response = self.client.UpdateDatabaseObjects(
+        response = self.client.updateDatabaseObjects(
             body=request
         ).result(timeout=timeout)
         return response.objects
