@@ -29,9 +29,30 @@ response = client.GetObject("a001")
 Access the [mock-DRS] `POST /update-db` endpoint with, e.g.:
 
 ```py
-response = client.UpdateTaskInfoConfig(
-    clear="True",
-    objects=["objet_id1","object_id2"],
+response = client.updateDatabaseObjects(
+    clear_db=True,
+    objects=[
+        {
+            "access_methods": [
+                {
+                    "access_id": "string",
+                    "access_url": {"headers": ["Authorization"], "url": "string"},
+                    "region": "us-east-1",
+                    "type": "s3",
+                }
+            ],
+            "aliases": ["string"],
+            "checksums": [{"checksum": "string", "type": "string"}],
+            "created": "string",
+            "description": "string",
+            "id": "string",
+            "mime_type": "application/json",
+            "name": "string",
+            "size": 0,
+            "updated": "string",
+            "version": "string",
+        }
+    ],
 )
 ```
 
