@@ -1,4 +1,4 @@
-
+[![PyPI version](https://badge.fury.io/py/drs-client.svg)](https://badge.fury.io/py/drs-client) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/drs_client)
 # DRS-cli
 
 This repository contains a [Bravado]-based client for a mockup implementation of
