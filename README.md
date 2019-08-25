@@ -1,3 +1,4 @@
+
 # DRS-cli
 
 This repository contains a [Bravado]-based client for a mockup implementation of
@@ -51,10 +52,13 @@ response = client.updateDatabaseObjects(
             "size": 0,
             "updated": "string",
             "version": "string",
-        }
+        },
     ],
 )
 ```
+the objects list can contain any number of such drs_object dicts and the clear_db
+indicates weather or not the db should be emptied before upload of specified 
+objects. 
 
 For further details on populating the DRS via the `POST /update-db` endpoint,
 please see the documentation in the [mock-DRS] repository.
@@ -77,6 +81,11 @@ python setup.py install
 
 ```bash
 pip install -e git+https://github.com/elixir-europe/DRS-cli.git#egg=drs_client
+```
+or
+
+```bash
+pip install drs_client
 ```
 
 ## Contributing
