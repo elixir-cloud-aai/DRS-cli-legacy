@@ -1,6 +1,7 @@
 """
 Client for the mockup GA4GH Data Repository Service `mock-DRS`.
 """
+from urllib.parse import urlparse
 from typing import List
 
 from bravado.client import SwaggerClient, CallableOperation
@@ -29,7 +30,7 @@ class Client:
         if jwt:
             http_client = RequestsClient()
             http_client.set_api_key(
-                host='',
+                host=urlparse(url).netloc,
                 api_key=f"Bearer {jwt}",
                 param_name="Authorization",
                 param_in="header"
