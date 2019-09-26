@@ -5,6 +5,7 @@ from typing import List
 
 from bravado.client import SwaggerClient, CallableOperation
 from bravado_core.formatter import DEFAULT_FORMATS
+from bravado.requests_client import RequestsClient
 
 # Bravado configuration
 DEFAULT_CONFIG = {
@@ -18,13 +19,30 @@ DEFAULT_CONFIG = {
 
 class Client:
     """Client for mock-DRS service."""
-    def __init__(self, url, config=DEFAULT_CONFIG):
+    def __init__(
+        self,
+        url,
+        jwt=None,
+        config=DEFAULT_CONFIG
+    ):
         swagger_path = "{url}/swagger.json".format(url=url.rstrip("/"))
+        if jwt:
+            http_client = RequestsClient()
+            http_client.set_api_key(
+                host=None,
+                api_key=f"Bearer {jwt}",
+                param_name="Authorization",
+                param_in="header"
+            )
+        else:
+            http_client = None
         self.models = SwaggerClient.from_url(
             swagger_path,
+            http_client=http_client,
             config=config
         )
         self.client = self.models.DataRepositoryService
+
 
 
     def getObject(
